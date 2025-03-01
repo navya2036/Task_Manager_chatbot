@@ -133,6 +133,12 @@ if prompt := st.chat_input("Type your query here..."):
             response = add_reminder(reminder_description)
         else:
             response = "Please provide a reminder description."
+    elif "show reminders" in prompt.lower():
+        response = replace_placeholders("Your reminders: {reminder_list}")
+    elif "show tasks" in prompt.lower():
+        response = replace_placeholders("Your tasks: {task_list}")
+    elif "show events" in prompt.lower():
+        response = replace_placeholders("Your events: {event_list}")
 
     else:
         # Find the closest match from the dataset
