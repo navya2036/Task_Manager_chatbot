@@ -1,0 +1,44 @@
+user_input,category,response
+Add task Buy groceries,task_addition,Task added successfully!
+Add task Complete assignment,task_addition,Task added successfully!
+Add task Call the doctor,task_addition,Task added successfully!
+Show my tasks,task_retrieval,Your tasks: {task_list}
+List all my pending tasks,task_retrieval,Your tasks: {task_list}
+What tasks do I need to do today?,task_retrieval,Your tasks: {task_list}
+Set reminder for my meeting at 3PM,reminder_setting,Reminder set!
+Remind me to drink water every 2 hours,reminder_setting,Reminder set!
+Set an alarm for 7 AM,reminder_setting,Reminder set!
+Remove task Complete assignment,task_deletion,Task removed successfully!
+Delete task Call the doctor,task_deletion,Task removed successfully!
+Remove task Buy groceries,task_deletion,Task removed successfully!
+List all reminders,reminder_retrieval,Your reminders: {reminder_list}
+Show me my reminders,reminder_retrieval,Your reminders: {reminder_list}
+What reminders do I have set?,reminder_retrieval,Your reminders: {reminder_list}
+Schedule a call with John at 5 PM,event_scheduling,Event scheduled!
+Book a meeting with the team tomorrow,event_scheduling,Event scheduled!
+Schedule dentist appointment on Monday,event_scheduling,Event scheduled!
+What events do I have this week?,event_retrieval,Here are your events: {event_list}
+List my calendar events for next week,event_retrieval,Here are your events: {event_list}
+Show my upcoming meetings,event_retrieval,Here are your events: {event_list}
+Delete reminder for my meeting,reminder_deletion,Reminder deleted!
+Cancel reminder to drink water,reminder_deletion,Reminder deleted!
+Remove alarm for 7 AM,reminder_deletion,Reminder deleted!
+Can you help me manage my tasks?,general_query,"Yes, I can help! Try adding a task or setting a reminder."
+How can I add a new task?,general_query,"Yes, I can help! Try adding a task or setting a reminder."
+What can you do?,general_query,"Yes, I can help! Try adding a task or setting a reminder."
+Remind me about my project deadline on Friday,reminder_setting,Reminder set for project deadline!
+Create a new event for team lunch on Saturday,reminder_setting,Reminder set for project deadline!
+Set a task to finish reading a book by next week,reminder_setting,Reminder set for project deadline!
+Schedule a meeting with Alex for next Monday at 10 AM,event_scheduling,Team lunch event created!
+What tasks do I have scheduled for next Monday?,event_scheduling,Team lunch event created!
+Give me a summary of my pending work,event_scheduling,Team lunch event created!
+Create a new note for grocery list,task_retrieval,Task added for book reading!
+Show my notes,task_retrieval,Task added for book reading!
+Delete my grocery list note,task_retrieval,Task added for book reading!
+Remind me to call mom every evening,note_management,Meeting with Alex scheduled!
+List all my daily reminders,note_management,Meeting with Alex scheduled!
+What recurring reminders do I have?,note_management,Meeting with Alex scheduled!
+Schedule a trip to New York on December 15th,reminder_setting,Tasks scheduled for Monday: {task_list}
+Create an event for my birthday party next month,reminder_setting,Tasks scheduled for Monday: {task_list}
+Show me my reminders for tomorrow,reminder_setting,Tasks scheduled for Monday: {task_list}
+Delete my appointment with the dentist,event_scheduling,Summary of pending work: {task_list}
