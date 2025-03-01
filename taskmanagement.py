@@ -64,21 +64,21 @@ def replace_placeholders(response):
             return response.replace("{task_list}", task_list_str)
         else:
             return response.replace("{task_list}", "No tasks found.")
-    
+
     if "{event_list}" in response:
         if st.session_state.events:
             event_list_str = "\n".join([f"- {event}" for event in st.session_state.events])
             return response.replace("{event_list}", event_list_str)
         else:
             return response.replace("{event_list}", "No events found.")
-    
+
     if "{reminder_list}" in response:
         if st.session_state.reminders:
             reminder_list_str = "\n".join([f"- {reminder}" for reminder in st.session_state.reminders])
             return response.replace("{reminder_list}", reminder_list_str)
         else:
             return response.replace("{reminder_list}", "No reminders found.")
-    
+
     return response
 
 # Function to handle task addition
@@ -119,25 +119,25 @@ if prompt := st.chat_input("Type your query here..."):
             response = add_task(task_description)
         else:
             response = "Please provide a task description."
-    
+
     elif "add event" in prompt.lower():
         event_description = prompt.lower().replace("add event", "").strip()
         if event_description:
             response = add_event(event_description)
         else:
             response = "Please provide an event description."
-    
+
     elif "add reminder" in prompt.lower():
         reminder_description = prompt.lower().replace("add reminder", "").strip()
         if reminder_description:
             response = add_reminder(reminder_description)
         else:
             response = "Please provide a reminder description."
-    
+
     else:
         # Find the closest match from the dataset
         closest_response = find_closest_input(prompt, vectorizer, user_input_vectors, df)
-        
+
         if closest_response:
             # Replace placeholders in the response
             response = replace_placeholders(closest_response)
