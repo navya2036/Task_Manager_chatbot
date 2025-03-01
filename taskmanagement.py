@@ -33,7 +33,7 @@ vectorizer = TfidfVectorizer()
 user_input_vectors = vectorizer.fit_transform(df['user_input'])
 
 # Configure Gemini API 
-API_KEY = "AIzaSyB3uidq20tP_lUTFxoN9Mvq4mgRLDSQ3Bk"
+API_KEY = "AIzaSyB3uidq20tP_lUTFxoN9Mvq4mgRLDSQ3Bk" 
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
 
@@ -58,6 +58,11 @@ def replace_placeholders(response):
             return response.replace("{task_list}", "No tasks found.")
     return response
 
+# Function to handle task addition
+def add_task(task_description):
+    st.session_state.tasks.append(task_description)
+    return f"Task added successfully: {task_description}"
+
 # Streamlit app
 st.title("Task Management Chatbot 📝")
 st.write("Welcome to the Task Management Chatbot! How can I assist you with your tasks, reminders, or events?")
@@ -74,23 +79,28 @@ if prompt := st.chat_input("Type your query here..."):
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Find the closest match from the dataset
-    closest_response = find_closest_input(prompt, vectorizer, user_input_vectors, df)
-    
-    if closest_response:
-        # Replace placeholders in the response
-        closest_response = replace_placeholders(closest_response)
-        
-        # Add assistant response to chat history
-        st.session_state.messages.append({"role": "assistant", "content": closest_response})
-        with st.chat_message("assistant"):
-            st.markdown(closest_response)
+    # Check if the user is adding a task
+    if "add task" in prompt.lower():
+        task_description = prompt.lower().replace("add task", "").strip()
+        if task_description:
+            response = add_task(task_description)
+        else:
+            response = "Please provide a task description."
     else:
-        # If no relevant response is found, use Gemini to generate a response
-        try:
-            response = model.generate_content(prompt)
-            st.session_state.messages.append({"role": "assistant", "content": response.text})
-            with st.chat_message("assistant"):
-                st.markdown(response.text)
-        except Exception as e:
-            st.error(f"Sorry, I couldn't generate a response. Error: {e}")
+        # Find the closest match from the dataset
+        closest_response = find_closest_input(prompt, vectorizer, user_input_vectors, df)
+        
+        if closest_response:
+            # Replace placeholders in the response
+            response = replace_placeholders(closest_response)
+        else:
+            # If no relevant response is found, use Gemini to generate a response
+            try:
+                response = model.generate_content(prompt).text
+            except Exception as e:
+                response = f"Sorry, I couldn't generate a response. Error: {e}"
+
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": response})
+    with st.chat_message("assistant"):
+        st.markdown(response)
